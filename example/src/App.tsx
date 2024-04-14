@@ -6,7 +6,7 @@ import Gradient from 'react-native-gradient';
 export default function App() {
   return (
     <View style={styles.container}>
-      <Gradient style={styles.box} colors={['#fff', '#000']} />
+      <Gradient style={styles.box} colors={['red', 'blue']} />
     </View>
   );
 }

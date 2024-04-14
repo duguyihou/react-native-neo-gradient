@@ -15,12 +15,14 @@ const LINKING_ERROR =
   '- You rebuilt the app after installing the package\n' +
   '- You are not using Expo Go\n';
 
+type Color = number | ColorValue;
+type ProcessedColor = ProcessedColorValue | undefined | null;
 interface GradientProps extends ViewProps {
-  colors: number[] | ColorValue[];
+  colors: Color[];
 }
 
 interface NativeGradientProps extends Omit<GradientProps, 'colors'> {
-  colors: ProcessedColorValue[] | null;
+  colors: ProcessedColor[];
 }
 
 const ComponentName = 'GradientView';
@@ -34,16 +36,10 @@ const GradientView =
 
 const Gradient = ({ colors, ...props }: GradientProps) => {
   const processedColors = colors.map((color) => processColor(color));
-  if (processedColors.includes(null)) {
-    throw new Error('error');
+  if (processedColors.includes(null) || processedColors.includes(undefined)) {
+    throw new Error('Error: invalid color');
   }
-  // .filter((color) => color !== null || color !== undefined);
-  return (
-    <GradientView
-      colors={processedColors as ProcessedColorValue[]}
-      {...props}
-    />
-  );
+  return <GradientView colors={processedColors} {...props} />;
 };
 
 export default Gradient;
