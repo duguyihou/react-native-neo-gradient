@@ -7,7 +7,7 @@ class Store: ObservableObject {
 final class GradientViewProxy: UIView {
   private var store: Store = .init()
   private var gradientView: UIView?
-  
+
   override init(frame: CGRect) {
     super.init(frame: frame)
     let vc = UIHostingController(rootView: GradientView().environmentObject(store))
@@ -15,20 +15,21 @@ final class GradientViewProxy: UIView {
     addSubview(vc.view)
     gradientView = vc.view
   }
-  
+
   override func layoutSubviews() {
     super.layoutSubviews()
     gradientView?.frame = bounds
   }
-  
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
-  @objc var colors: NSArray! {
+
+  @objc var colors: [UIColor]? {
     didSet {
-      print("🐵 --- colors \(colors)")
-      store.colors = [Color.red, Color.blue]
+      if let colors {
+        store.colors = colors.map { Color.convert(fromUIColor: $0) }
+      }
     }
   }
 }
