@@ -1,8 +1,12 @@
+import React from 'react';
 import {
   requireNativeComponent,
   UIManager,
   Platform,
-  type ViewStyle,
+  processColor,
+  type ProcessedColorValue,
+  type ColorValue,
+  type ViewProps,
 } from 'react-native';
 
 const LINKING_ERROR =
@@ -11,16 +15,35 @@ const LINKING_ERROR =
   '- You rebuilt the app after installing the package\n' +
   '- You are not using Expo Go\n';
 
-type GradientProps = {
-  color: string;
-  style: ViewStyle;
-};
+interface GradientProps extends ViewProps {
+  colors: number[] | ColorValue[];
+}
+
+interface NativeGradientProps extends Omit<GradientProps, 'colors'> {
+  colors: ProcessedColorValue[] | null;
+}
 
 const ComponentName = 'GradientView';
 
-export const GradientView =
+const GradientView =
   UIManager.getViewManagerConfig(ComponentName) != null
-    ? requireNativeComponent<GradientProps>(ComponentName)
+    ? requireNativeComponent<NativeGradientProps>(ComponentName)
     : () => {
         throw new Error(LINKING_ERROR);
       };
+
+const Gradient = ({ colors, ...props }: GradientProps) => {
+  const processedColors = colors.map((color) => processColor(color));
+  if (processedColors.includes(null)) {
+    throw new Error('error');
+  }
+  // .filter((color) => color !== null || color !== undefined);
+  return (
+    <GradientView
+      colors={processedColors as ProcessedColorValue[]}
+      {...props}
+    />
+  );
+};
+
+export default Gradient;

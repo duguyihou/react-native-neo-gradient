@@ -1,12 +1,12 @@
 import * as React from 'react';
 
 import { StyleSheet, View } from 'react-native';
-import { GradientView } from 'react-native-gradient';
+import Gradient from 'react-native-gradient';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <GradientView color="#32a852" style={styles.box} />
+      <Gradient style={styles.box} colors={['#fff', '#000']} />
     </View>
   );
 }
@@ -18,8 +18,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   box: {
-    width: 60,
-    height: 60,
+    width: 200,
+    height: 200,
     marginVertical: 20,
   },
 });
