@@ -9,6 +9,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
+import com.facebook.react.bridge.ColorPropConverter
 import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.uimanager.SimpleViewManager
 import com.facebook.react.uimanager.ThemedReactContext
@@ -16,6 +17,8 @@ import com.facebook.react.uimanager.annotations.ReactProp
 
 class GradientViewManager : SimpleViewManager<View>() {
   override fun getName() = "GradientView"
+
+  private var colors: List<Color>? = null
 
   override fun createViewInstance(reactContext: ThemedReactContext): View {
     return createComposeView(reactContext)
@@ -25,18 +28,19 @@ class GradientViewManager : SimpleViewManager<View>() {
     return ComposeView(context).apply {
       setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
       setContent {
-        val brush = Brush.horizontalGradient(listOf(Color.Red, Color.Blue))
-        Box(
-          modifier = Modifier
-            .background(brush)
-        )
+        colors?.let {
+          val brush = Brush.verticalGradient(it)
+          Box(modifier = Modifier.background(brush))
+        }
       }
     }
   }
 
   @ReactProp(name = "colors")
   fun setColors(view: View, colors: ReadableArray) {
-    val a = (0 until colors.size()).map { colors.getInt(it) }
-    println("🐵 ---- a $a")
+    this.colors = colors.toArrayList().map {
+      val colorValue = ColorPropConverter.getColor(it, view.context)
+      Color(colorValue)
+    }
   }
 }
