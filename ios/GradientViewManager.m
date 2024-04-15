@@ -2,6 +2,6 @@
 
 @interface RCT_EXTERN_MODULE(GradientViewManager, RCTViewManager)
 
-RCT_EXPORT_VIEW_PROPERTY(color, NSString)
+RCT_EXPORT_VIEW_PROPERTY(colors, NSArray<UIColor *>)
 
 @end
