@@ -1,5 +1,5 @@
 {
-  "name": "react-native-gradient",
+  "name": "react-native-neo-gradient",
   "version": "0.1.0",
   "description": "gradient component for react native",
   "main": "lib/commonjs/index",
@@ -41,14 +41,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/duguyihou/react-native-gradient.git"
+    "url": "git+https://github.com/duguyihou/react-native-neo-gradient.git"
   },
   "author": "duguyihou <duguyihou@gmail.com> (https://github.com/duguyihou)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/duguyihou/react-native-gradient/issues"
+    "url": "https://github.com/duguyihou/react-native-neo-gradient/issues"
   },
-  "homepage": "https://github.com/duguyihou/react-native-gradient#readme",
+  "homepage": "https://github.com/duguyihou/react-native-neo-gradient#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },

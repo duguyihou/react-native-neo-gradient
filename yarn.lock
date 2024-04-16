@@ -10829,9 +10829,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"react-native-gradient@workspace:.":
+"react-native-neo-gradient@workspace:.":
   version: 0.0.0-use.local
-  resolution: "react-native-gradient@workspace:."
+  resolution: "react-native-neo-gradient@workspace:."
   dependencies:
     "@commitlint/config-conventional": ^17.0.2
     "@evilmartians/lefthook": ^1.5.0
