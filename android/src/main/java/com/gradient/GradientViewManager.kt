@@ -39,8 +39,7 @@ class GradientViewManager : SimpleViewManager<View>() {
   @ReactProp(name = "colors")
   fun setColors(view: View, colors: ReadableArray) {
     this.colors = colors.toArrayList().map {
-      val colorValue = ColorPropConverter.getColor(it, view.context)
-      Color(colorValue)
+      Color(ColorPropConverter.getColor(it, view.context))
     }
   }
 }
