@@ -1,9 +1,9 @@
 package com.gradient
 
-import android.content.Context
 import android.view.View
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -21,18 +21,19 @@ class GradientViewManager : SimpleViewManager<View>() {
   private var colors: List<Color>? = null
 
   override fun createViewInstance(reactContext: ThemedReactContext): View {
-    return createComposeView(reactContext)
-  }
-
-  private fun createComposeView(context: Context): View {
-    return ComposeView(context).apply {
+    return  ComposeView(reactContext).apply {
       setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
       setContent {
-        colors?.let {
-          val brush = Brush.verticalGradient(it)
-          Box(modifier = Modifier.background(brush))
-        }
+        GradientView()
       }
+    }
+  }
+
+  @Composable
+  fun GradientView() {
+    colors?.let {
+      val brush = Brush.verticalGradient(it)
+      Box(modifier = Modifier.background(brush))
     }
   }
 
