@@ -14,7 +14,7 @@ jobs:
       - uses: actions/stale@main
         id: stale
         with:
-          repo-token: ${{ secrets.GRADIENT_GITHUB_TOKEN }}
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
           stale-pr-message: 'This PR is stale because it has been open for more than 1 days with no activity. To mark it as active, either remove the `stale` label or comment. Otherwise it will be closed within 7 days.'
           days-before-stale: 1
           days-before-close: 2
