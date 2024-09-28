@@ -2,7 +2,7 @@ name: 'Stale bot'
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 15 * * *'
+    - cron: '0 0 * * *'
 permissions:
   pull-requests: write
   issues: write
