@@ -1,0 +1,24 @@
+name: 'Stale bot'
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 15 * * *'
+permissions:
+  pull-requests: write
+  issues: write
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/stale@main
+        id: stale
+        with:
+          repo-token: ${{ secrets.GRADIENT_GITHUB_TOKEN }}
+          stale-pr-message: 'This PR is stale because it has been open for more than 1 days with no activity. To mark it as active, either remove the `stale` label or comment. Otherwise it will be closed within 7 days.'
+          days-before-stale: 1
+          days-before-close: 2
+          operations-per-run: 200
+          stale-issue-message: "This issue has been marked as stale due to inactivity because it has been open for more than 2 days with no activity. It will be closed if no further activity occurs within 7 days"
+          close-pr-message: "This pull request has been closed due to inactivity."
+          close-issue-message: "This issue has been closed due to inactivity."
